@@ -1,0 +1,24 @@
+# Optional: Postgres in Docker (if you don't have a local Postgres).
+# Set DB_PORT=5434 in .env when using it.
+services:
+  db:
+    profiles: ["docker-db"]
+    image: postgres:16-alpine
+    restart: unless-stopped
+    container_name: divotiq-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-divotiq}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-divotiq}
+      POSTGRES_DB: ${DB_NAME:-divotiq}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-divotiq} -d ${DB_NAME:-divotiq}"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  postgres_data:

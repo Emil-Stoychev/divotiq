@@ -1,0 +1,113 @@
+// Per-occasion themes. Only custom properties change — components stay the same.
+
+:root {
+  --bg-0: #0b0822;
+  --bg-1: #140f3a;
+  --bg-2: #1d1552;
+  --surface-1: #19133f;
+  --surface-2: #221a52;
+  --surface-3: #2c2266;
+  --glass: rgba(28, 20, 74, 0.62);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --text: #ffffff;
+  --text-muted: #b8b1e3;
+  --text-dim: #8a83b8;
+  --focus: #ffe08a;
+  --accent: #8b5cf6;
+  --accent-2: #ff4fa3;
+  --accent-3: #22d3ee;
+  --glow-1: rgba(139, 92, 246, 0.35);
+  --glow-2: rgba(255, 79, 163, 0.22);
+  --hero-from: #ff7a1a;
+  --hero-to: #ffd23f;
+  color-scheme: dark;
+}
+
+:root[data-theme='christmas'] {
+  --bg-0: #12060c;
+  --bg-1: #2a0b16;
+  --bg-2: #3d0f1f;
+  --surface-1: #2b0e19;
+  --surface-2: #3a1222;
+  --surface-3: #4b182c;
+  --glass: rgba(52, 14, 28, 0.66);
+  --accent: #e23b3b;
+  --accent-2: #1f9d55;
+  --accent-3: #ffc93c;
+  --glow-1: rgba(226, 59, 59, 0.35);
+  --glow-2: rgba(31, 157, 85, 0.25);
+  --text-muted: #e8c6cd;
+  --text-dim: #b48b95;
+}
+
+:root[data-theme='birthday'] {
+  --bg-0: #160826;
+  --bg-1: #2a0d45;
+  --bg-2: #3d1263;
+  --surface-1: #2c1049;
+  --surface-2: #3b155f;
+  --surface-3: #4c1b78;
+  --glass: rgba(56, 18, 92, 0.62);
+  --accent: #ff5fa2;
+  --accent-2: #a855f7;
+  --accent-3: #ffd166;
+  --glow-1: rgba(255, 95, 162, 0.35);
+  --glow-2: rgba(168, 85, 247, 0.3);
+  --text-muted: #e9c8f5;
+}
+
+:root[data-theme='drinking'] {
+  --bg-0: #140a04;
+  --bg-1: #2a1406;
+  --bg-2: #3b1d0a;
+  --surface-1: #2c1708;
+  --surface-2: #3b200c;
+  --surface-3: #4d2a10;
+  --glass: rgba(58, 30, 10, 0.64);
+  --accent: #ff8a1f;
+  --accent-2: #ef4444;
+  --accent-3: #ffc93c;
+  --glow-1: rgba(255, 138, 31, 0.35);
+  --glow-2: rgba(239, 68, 68, 0.22);
+  --text-muted: #f0d2b6;
+  --text-dim: #b99474;
+}
+
+:root[data-theme='family'] {
+  --bg-0: #061418;
+  --bg-1: #0b2a30;
+  --bg-2: #0f3a40;
+  --surface-1: #0f2c33;
+  --surface-2: #143a42;
+  --surface-3: #1a4a54;
+  --glass: rgba(14, 50, 58, 0.64);
+  --accent: #14b8a6;
+  --accent-2: #f59e0b;
+  --accent-3: #38bdf8;
+  --glow-1: rgba(20, 184, 166, 0.32);
+  --glow-2: rgba(245, 158, 11, 0.22);
+  --text-muted: #bfe3e2;
+  --text-dim: #85aeb0;
+}
+
+:root[data-theme='custom'] {
+  --accent: #8b5cf6;
+  --accent-2: #ec4899;
+  --accent-3: #ffc93c;
+}
+
+:root[data-theme='neon'] {
+  --bg-0: #03050f;
+  --bg-1: #0a0f24;
+  --bg-2: #0f1733;
+  --surface-1: #0d1430;
+  --surface-2: #121c40;
+  --surface-3: #18244f;
+  --glass: rgba(14, 22, 58, 0.62);
+  --accent: #22d3ee;
+  --accent-2: #f0abfc;
+  --accent-3: #a3e635;
+  --glow-1: rgba(34, 211, 238, 0.32);
+  --glow-2: rgba(240, 171, 252, 0.24);
+}

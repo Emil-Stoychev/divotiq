@@ -1,0 +1,101 @@
+@use '../tokens' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-backdrop;
+  pointer-events: none;
+  overflow: hidden;
+
+  &__particle {
+    position: absolute;
+    top: -40px;
+    border-radius: 50%;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  &--snow &__particle {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    animation-name: fall;
+  }
+
+  &--confetti &__particle {
+    border-radius: 2px;
+    background: var(--color);
+    opacity: 0.8;
+    animation-name: fall-spin;
+  }
+
+  &--bubbles &__particle {
+    top: auto;
+    bottom: -40px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), rgba(255, 201, 60, 0.08) 60%, transparent 70%);
+    border: 1px solid rgba(255, 220, 150, 0.25);
+    animation-name: rise;
+  }
+
+  &--sparkles &__particle {
+    background: none;
+    width: 4px !important;
+    height: 4px !important;
+    background: #fff;
+    box-shadow:
+      0 0 6px 2px var(--accent-3),
+      0 0 14px 4px var(--glow-1);
+    animation-name: sparkle;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+// Keep page content above the backdrop.
+.site,
+.game-shell {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fall {
+  from {
+    transform: translate3d(0, -5vh, 0);
+  }
+  to {
+    transform: translate3d(var(--drift), 105vh, 0);
+  }
+}
+
+@keyframes fall-spin {
+  from {
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(var(--drift), 105vh, 0) rotate(720deg);
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(var(--drift), -110vh, 0);
+    opacity: 0.2;
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,389 @@
+@use '../tokens' as *;
+
+// ---------------------------------------------------------------- Wheel graphic
+.wheel-graphic {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+
+  &__rim {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 4%;
+    background: radial-gradient(circle at 30% 25%, #fff3c4, #{$yellow} 35%, #{$yellow-deep} 70%, #b86a00);
+    box-shadow:
+      0 0 0 3px rgba(0, 0, 0, 0.25),
+      0 24px 60px -20px rgba(0, 0, 0, 0.8),
+      0 0 60px -10px var(--glow-1);
+  }
+
+  &__disc {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.12, 0.8, 0.18, 1);
+    will-change: transform;
+  }
+
+  &__segment {
+    transition: opacity $dur;
+
+    &--dim {
+      opacity: 0.35;
+    }
+  }
+
+  &__label {
+    font-family: $font-body;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, 0.35);
+    stroke-width: 1.4px;
+  }
+
+  &__pointer {
+    position: absolute;
+    top: -4%;
+    left: 50%;
+    width: 11%;
+    transform: translateX(-50%);
+    z-index: 2;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+  }
+
+  &--idle &__disc {
+    animation: wheel-idle 40s linear infinite;
+  }
+}
+
+@keyframes wheel-idle {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ---------------------------------------------------------------- Hero
+.hero {
+  padding: $space-10 0 $space-12;
+
+  @include up($bp-md) {
+    padding: $space-16 0;
+  }
+
+  &__inner {
+    display: grid;
+    gap: $space-10;
+    align-items: center;
+
+    @include up($bp-md) {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    align-items: flex-start;
+  }
+
+  &__lead {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 34em;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-3;
+  }
+
+  &__note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  &__visual {
+    position: relative;
+    padding: $space-6;
+  }
+
+  &__wheel {
+    position: relative;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  &__hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff6d1, #{$yellow} 55%, #{$yellow-deep});
+    color: $ink;
+    font-weight: 800;
+    font-size: clamp(12px, 1.6vw, 16px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  &__float {
+    position: absolute;
+    @include glass;
+    padding: 10px 14px;
+    border-radius: $radius-pill;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+    animation: float 6s ease-in-out infinite;
+
+    &--1 {
+      top: 6%;
+      left: -2%;
+    }
+
+    &--2 {
+      top: 44%;
+      right: -4%;
+      animation-delay: -2s;
+    }
+
+    &--3 {
+      bottom: 6%;
+      left: 4%;
+      animation-delay: -4s;
+    }
+
+    @include down($bp-sm) {
+      font-size: 12px;
+      padding: 8px 10px;
+    }
+  }
+
+  &__avatars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: $space-5;
+    font-size: 28px;
+
+    span {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 2px solid var(--line-strong);
+      margin-left: -10px;
+    }
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// ---------------------------------------------------------------- Mode cards
+.mode-grid {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.mode-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-5;
+  min-height: 116px;
+  border-radius: $radius-lg;
+  border: 1.5px solid var(--line);
+  background:
+    radial-gradient(120% 120% at 0% 0%, color-mix(in srgb, var(--c1) 38%, transparent), transparent 60%),
+    radial-gradient(120% 120% at 100% 100%, color-mix(in srgb, var(--c2) 28%, transparent), transparent 60%),
+    var(--surface-1);
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  transition:
+    transform $dur $ease-out,
+    border-color $dur,
+    box-shadow $dur;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--c1) 60%, transparent);
+    box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--c1) 70%, transparent);
+  }
+
+  &--selected {
+    border-color: $yellow;
+    box-shadow: 0 0 0 3px rgba(255, 201, 60, 0.25);
+  }
+
+  &--compact {
+    min-height: 0;
+    padding: $space-4;
+  }
+
+  &__icon {
+    flex: none;
+    font-size: 44px;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__name {
+    font-weight: 800;
+    font-size: 19px;
+  }
+
+  &__description {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  &__badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    padding: 2px 8px;
+    border-radius: $radius-pill;
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  &__check {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    color: $yellow;
+    font-size: 26px;
+  }
+}
+
+// ---------------------------------------------------------------- Home sections
+.home-section {
+  padding: $space-10 $space-4;
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin-bottom: $space-6;
+  }
+}
+
+.module-showcase {
+  display: grid;
+  gap: $space-3;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  &__item {
+    display: flex;
+    gap: $space-4;
+    padding: $space-4;
+    border-radius: $radius-md;
+    background: var(--surface-1);
+    border: 1px solid var(--line);
+  }
+
+  &__icon {
+    font-size: 32px;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  &__text {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}
+
+.home-steps {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  &__item {
+    position: relative;
+    padding: $space-6 $space-5;
+    border-radius: $radius-lg;
+    @include glass;
+  }
+
+  &__num {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: $font-brand;
+    font-size: 30px;
+    color: var(--accent-3);
+    opacity: 0.8;
+  }
+
+  &__icon {
+    font-size: 38px;
+  }
+
+  &__title {
+    margin: $space-3 0 $space-2;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  &__text {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.home-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-6;
+  padding: $space-8;
+  border-radius: $radius-xl;
+  background:
+    radial-gradient(80% 140% at 0% 0%, var(--glow-1), transparent 60%),
+    radial-gradient(80% 140% at 100% 100%, var(--glow-2), transparent 60%),
+    var(--surface-2);
+  border: 1px solid var(--line-strong);
+}
